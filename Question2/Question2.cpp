@@ -9,15 +9,24 @@
 #include <bits/stdc++.h>
 using namespace std;
  
-int securitiesBuying(int z,int security_value[])
+int securitiesBuying(int z, int security_value[], int n)
 {
-    int no_of_stocks=0;
-   // participants code here
- 
- 
+    int no_of_stocks = 0;
+    map<int, int> frequency;
+    for (int i = 0; i < n; ++i) {
+        frequency[security_value[i]] += i + 1;
+    }
+    for (auto& x : frequency) {
+        z -= x.first * x.second;
+        no_of_stocks += x.second;
+        if (z < 0) {
+            no_of_stocks -= (abs(z) - 1) / x.first + 1;
+            break;
+        }
+    }
     return no_of_stocks;
 }
- 
+
 int main(){
  
 int z;
@@ -43,7 +52,7 @@ int n= input_data.size();
  
  
  
-int no_of_stocks_purchased = securitiesBuying(z,security_value);
+int no_of_stocks_purchased = securitiesBuying(z,security_value,n);
 cout << no_of_stocks_purchased;
  
  
