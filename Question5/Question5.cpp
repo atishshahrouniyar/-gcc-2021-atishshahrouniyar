@@ -3,17 +3,32 @@ using namespace std;
 #include <iostream>
 
 string solution(string n) {
-    int previous = -1, prev = 0, cur = 0;
-    for (int i = 0; i < n.length(); ++i) {
-        if (n[i] == '0') {
-            if (i - previous == cur)
+    int previous = -1, prev = 0, cur = 0, i;
+    for (i = 0; i < n.length()-1; ++i) {
+        if (n[i] == '0' && n[i+1] == '1') {
+            if (i - previous > cur) {
                 prev = cur;
-            cur = max(cur, i - previous);
+                cur = i - previous;
+            }
+            else if (i - previous < cur)
+                prev = max(prev, i - previous);
+            else
+                prev = cur;
         }
-        else
+        else if(n[i]=='1')
             previous = i;
     }
-    if (prev != cur && cur & 1)
+    if (n[i] == '0') {
+        if (i - previous > cur) {
+            prev = cur;
+            cur = i - previous;
+        }
+        else if (i - previous < cur)
+            prev = max(prev, i - previous);
+        else
+            prev = cur;
+    }
+    if (prev != cur && cur & 1 && prev <= cur / 2)
         return "A";
     else
         return "B";
