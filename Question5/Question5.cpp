@@ -3,14 +3,17 @@ using namespace std;
 #include <iostream>
 
 string solution(string n) {
-    int previous = -1, max0 = 0;
+    int previous = -1, prev = 0, cur = 0;
     for (int i = 0; i < n.length(); ++i) {
-        if (n[i] == '0')
-            max0 = max(max0, i - previous);
+        if (n[i] == '0') {
+            if (i - previous == cur)
+                prev = cur;
+            cur = max(cur, i - previous);
+        }
         else
             previous = i;
     }
-    if (max0 & 1)
+    if (prev != cur && cur & 1)
         return "A";
     else
         return "B";
