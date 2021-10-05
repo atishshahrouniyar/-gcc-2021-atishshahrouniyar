@@ -4,7 +4,9 @@ using namespace std;
 #include <iostream>
 
 int solution(int n){
-    // code here
+    n <<=1;
+    ++n;
+    return n/3;
 }
 
 /*  Do not edit below code */
