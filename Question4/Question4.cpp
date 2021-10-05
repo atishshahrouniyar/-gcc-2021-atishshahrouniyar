@@ -23,21 +23,35 @@
 
 using namespace std;
 int totalPairs(int n, vector<int>& values) {
-    // Complete the total pairs function
-    return -1;
+    int answer = n-1;
+    stack<int> s;
+    s.push(values[0]);
+    for (int i = 1; i < n; ++i) {
+        if (values[i] > values[i - 1]) {
+            s.pop();
+            while (!s.empty() && s.top() <= values[i]) {
+                s.pop();
+                ++answer;
+            }
+            if (!s.empty())
+                ++answer;
+        }
+        s.push(values[i]);
+    }
+    return answer;
 }
 
-int main(){
-   int n;
-   cin >> n;
-   vector<int> values(n);
-   for (int i = 0; i < n; ++i) {
+int main() {
+    int n;
+    cin >> n;
+    vector<int> values(n);
+    for (int i = 0; i < n; ++i) {
         cin >> values[i];
-   }
-	int answer = totalPairs(n, values);
+    }
+    int answer = totalPairs(n, values);
     // Do not remove below line
     cout << answer << endl;
     // Do not print anything after this line
-        
+
     return 0;
 }
