@@ -5,8 +5,6 @@ int pos, max_profit, cur_profit, j;
 
 int calculateMaximizedReturns(int n, int k, int d, int m, vector<int> returns) {
 	vector<int> status(n, 1);
-	for (int i = 0; i < n; ++i)
-		cin >> returns[i];
 	for (int a = 0; a < k; ++a) {
 		pos = -1;
 		max_profit = INT_MIN;
@@ -57,7 +55,6 @@ int calculateMaximizedReturns(int n, int k, int d, int m, vector<int> returns) {
 	}
 	return max_profit;
 }
-
 
 vector<string> split(const string& str, char delim) {
     vector<string> strings;
