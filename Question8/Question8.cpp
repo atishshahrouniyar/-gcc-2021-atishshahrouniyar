@@ -1,10 +1,63 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+int pos, max_profit, cur_profit, j;
+
 int calculateMaximizedReturns(int n, int k, int d, int m, vector<int> returns) {
-    // Participant's code will go here
-    return -1;
+	vector<int> status(n, 1);
+	for (int i = 0; i < n; ++i)
+		cin >> returns[i];
+	for (int a = 0; a < k; ++a) {
+		pos = -1;
+		max_profit = INT_MIN;
+		for (int i = 0; i < n; ++i) {
+			cur_profit = 0;
+			if (status[i] == 0)
+				continue;
+			if (status[i] == 1) {
+				j = i + 1;
+				while (j <= i + d && j < n && status[j]) {
+					cur_profit += returns[j];
+					++j;
+				}
+				cur_profit *= m - 1;
+				cur_profit -= returns[i];
+			}
+			else {
+				j = i + 1;
+				while (j <= i + d && j < n && status[j] == 2) {
+					++j;
+					continue;
+				}
+				while (j <= i + d && j < n) {
+					cur_profit += returns[j];
+					++j;
+				}
+				cur_profit *= m - 1;
+				cur_profit -= returns[i] * m;
+			}
+			if (cur_profit > max_profit) {
+				pos = i;
+				max_profit = cur_profit;
+			}
+		}
+		status[pos] = 0;
+		j = pos + 1;
+		while (j <= pos + d && j < n && status[j]) {
+			status[j] = 2;
+			++j;
+		}
+	}
+	max_profit = 0;
+	for (int i = 0; i < n; ++i) {
+		if (status[i] == 1)
+			max_profit += returns[i];
+		else if (status[i] == 2)
+			max_profit += m * returns[i];
+	}
+	return max_profit;
 }
+
 
 vector<string> split(const string& str, char delim) {
     vector<string> strings;
