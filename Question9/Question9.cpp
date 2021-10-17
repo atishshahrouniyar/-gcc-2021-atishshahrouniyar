@@ -23,10 +23,9 @@
 
 using namespace std;
 
-int dp[20][10][1024];
-
 int bankersAndClients(int c, int b, vector< vector<int> >& time) {
     int max_power = 1 << b, answer = INT_MAX;
+    int dp[c][b][max_power];
     for (int i = 0; i < c; ++i) {
         for (int j = 0; j < b; ++j) {
             for (int k = 0; k < max_power; ++k)
