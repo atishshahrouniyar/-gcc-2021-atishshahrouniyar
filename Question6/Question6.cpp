@@ -13,7 +13,7 @@ int UF_root(int x, vector<int>& arr)
 
 void theHackathon(int n, int m, int a, int b, int f, int s, int t) {
     vector<int> arr(n);
-    vector<vector<int>> size(4, vector<int> (n));
+    vector<vector<int>> size(4, vector<int>(n));
     for (int i = 0; i < n; ++i) {
         arr[i] = i;
         size[0][i] = 1;
@@ -21,7 +21,7 @@ void theHackathon(int n, int m, int a, int b, int f, int s, int t) {
     unordered_map<string, int> corresponding;
     unordered_map<int, string> corr;
     string str, str1;
-    int num, max_size=0;
+    int num, max_size = 0;
     for (int i = 0; i < n; ++i) {
         cin >> str >> num;
         corresponding[str] = i;
@@ -32,7 +32,7 @@ void theHackathon(int n, int m, int a, int b, int f, int s, int t) {
         cin >> str >> str1;
         int root_x = UF_root(corresponding[str], arr);
         int root_y = UF_root(corresponding[str1], arr);
-        if (root_x == root_y || size[0][root_x]+size[0][root_y]>b || size[1][root_x]+ size[1][root_y] > f || size[2][root_x] + size[2][root_y] > s || size[3][root_x] + size[3][root_y] > t)
+        if (root_x == root_y || size[0][root_x] + size[0][root_y] > b || size[1][root_x] + size[1][root_y] > f || size[2][root_x] + size[2][root_y] > s || size[3][root_x] + size[3][root_y] > t)
             continue;
         if (size[0][root_x] < size[0][root_y])
         {
@@ -62,12 +62,14 @@ void theHackathon(int n, int m, int a, int b, int f, int s, int t) {
                 answers.insert(corr[i]);
         }
         for (string x : answers)
-            cout << x << endl;
+            cout << x << '\n';
     }
 }
 
 int main()
 {
+    ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+
     string inputdata_temp;
     getline(cin, inputdata_temp);
 
