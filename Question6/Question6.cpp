@@ -68,8 +68,6 @@ void theHackathon(int n, int m, int a, int b, int f, int s, int t) {
 
 int main()
 {
-    ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-
     string inputdata_temp;
     getline(cin, inputdata_temp);
 
