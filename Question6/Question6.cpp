@@ -56,13 +56,10 @@ void theHackathon(int n, int m, int a, int b, int f, int s, int t) {
     if (max_size < a)
         cout << "no groups" << endl;
     else {
-        set<string> answers;
         for (int i = 0; i < n; ++i) {
             if (size[0][UF_root(i, arr)] == max_size)
-                answers.insert(corr[i]);
+                cout << corr[i] << '\n';
         }
-        for (string x : answers)
-            cout << x << '\n';
     }
 }
 
